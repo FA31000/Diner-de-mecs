@@ -64,8 +64,11 @@ Ne compte que les dîners passés. Montre tous les membres de la liste (les inac
 - Tableau « Par personne » : nombre de dîners (A), nombre de fois organisateur (B), nombre de désistements (C).
 - Tableau « Présences » (D) : une colonne par dîner passé. ✓ = venu, ✗ = désisté, vide = pas invité.
 
+### Page « Dîners précédents » (`/diners`)
+Une carte par dîner passé, du plus récent au plus ancien : date, organisateur, liste des venus, désistements (avec « remplacé par … » si un remplaçant est indiqué). Les noms sont affichés comme dans la liste des participants.
+
 ### Menu
-Une barre verte en haut de chaque page : « Prochain dîner » et « Statistiques ».
+Une barre verte en haut de chaque page : « Prochain dîner », « Dîners précédents », « Statistiques ».
 
 ### Fonctionnement
 - Le site relit le Google Sheet à chaque ouverture. Pas de base de données, pas de tâche automatique.
@@ -86,7 +89,8 @@ Une barre verte en haut de chaque page : « Prochain dîner » et « Statistique
 - `lib/ranking.js` : applique les règles de classement.
 - `app/page.js` : page « Prochain dîner ».
 - `lib/stats.js` + `app/stats/page.js` : page « Statistiques ».
-- `app/layout.js` : menu commun aux deux pages.
+- `app/diners/page.js` : page « Dîners précédents ».
+- `app/layout.js` : menu commun aux pages.
 - Lancer en local : `npm run dev`, puis http://localhost:3000.
 
 ## Phases
@@ -96,6 +100,7 @@ Une barre verte en haut de chaque page : « Prochain dîner » et « Statistique
 4. **Mise en ligne** sur Vercel. ✅ Fait (avant la phase 3, à la demande).
 
 ## Historique des changements
+- 2026-11-03 — Page « Dîners précédents » ajoutée au menu ; `lib/sheet.js` garde aussi qui a remplacé qui (`replacedBy`).
 - 2026-11-03 — Phase 3 : page « Statistiques » (dîners, organisations, désistements, tableau des présences) + menu en haut des pages.
 - 2026-11-03 — Site en ligne sur https://diner-de-mecs.vercel.app, vérifié sur le tableau test.
 - 2026-11-03 — Mise en ligne : code envoyé sur GitHub FA31000/Diner-de-mecs, `vercel.json` ajouté (type Next.js) après un échec de déploiement.

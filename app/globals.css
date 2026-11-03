@@ -61,7 +61,8 @@ li.organizer {
 nav {
   display: flex;
   justify-content: center;
-  gap: 24px;
+  flex-wrap: wrap;
+  gap: 8px 24px;
   padding: 14px 16px;
   background: #2f5d34;
 }
@@ -70,6 +71,17 @@ nav a {
   color: white;
   text-decoration: none;
   font-weight: 600;
+}
+
+.dinner {
+  background: white;
+  border-radius: 8px;
+  padding: 4px 16px;
+  margin-top: 12px;
+}
+
+.dinner h2 {
+  margin-top: 12px;
 }
 
 .table-wrap {
