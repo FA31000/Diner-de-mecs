@@ -58,6 +58,53 @@ li.organizer {
   text-align: right;
 }
 
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  padding: 14px 16px;
+  background: #2f5d34;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+table {
+  border-collapse: collapse;
+  background: white;
+  border-radius: 8px;
+  width: 100%;
+}
+
+th,
+td {
+  padding: 8px 12px;
+  border-bottom: 1px solid #eee;
+  text-align: center;
+  white-space: nowrap;
+}
+
+th:first-child,
+td:first-child {
+  text-align: left;
+}
+
+th {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+tr.inactive {
+  color: #aaa;
+}
+
 .error {
   background: #fde8e8;
   padding: 12px;

@@ -59,11 +59,13 @@ Un désistement ne compte pas comme une venue. La personne remonte donc d'elle-m
 3. La liste d'attente, dans l'ordre : si un invité dit non, on appelle le suivant.
 4. À côté de chaque nom : nombre de dîners et date du dernier dîner.
 
-### Page « Statistiques »
-- A. Nombre de dîners par personne.
-- B. Nombre de fois organisateur par personne.
-- C. Nombre de désistements par personne.
-- D. Tableau des présences : qui était à quel dîner.
+### Page « Statistiques » (`/stats`)
+Ne compte que les dîners passés. Montre tous les membres de la liste (les inactifs en gris, marqués « inactif »).
+- Tableau « Par personne » : nombre de dîners (A), nombre de fois organisateur (B), nombre de désistements (C).
+- Tableau « Présences » (D) : une colonne par dîner passé. ✓ = venu, ✗ = désisté, vide = pas invité.
+
+### Menu
+Une barre verte en haut de chaque page : « Prochain dîner » et « Statistiques ».
 
 ### Fonctionnement
 - Le site relit le Google Sheet à chaque ouverture. Pas de base de données, pas de tâche automatique.
@@ -75,20 +77,28 @@ Un désistement ne compte pas comme une venue. La personne remonte donc d'elle-m
 - Code sur GitHub : https://github.com/FA31000/Diner-de-mecs (compte FA31000).
 - Le serveur télécharge une copie du Sheet (export xlsx public) et la lit avec SheetJS. Aucune clé Google.
 - **L'application ne modifie jamais le Google Sheet.** Aucun code d'écriture.
+- Site en ligne : https://diner-de-mecs.vercel.app
+- Vercel : projet « diner-de-mecs », relié au dépôt GitHub, redéploie à chaque envoi sur `main`. `vercel.json` force le type Next.js.
+- Git : ce dossier a son propre dépôt. Commits signés FA31000, envoi avec le compte FA31000 (via `gh`), réglés pour ce dossier seulement.
 
 ### Fichiers
 - `lib/sheet.js` : télécharge et lit le Sheet (membres + un objet par onglet de dîner : date, venus, désistés, organisateur). Les lignes sont trouvées par leur libellé en colonne A (« Repas du », « Viendra », « Remplacé par », « organisateur »). Les personnes commencent en colonne C.
 - `lib/ranking.js` : applique les règles de classement.
 - `app/page.js` : page « Prochain dîner ».
+- `lib/stats.js` + `app/stats/page.js` : page « Statistiques ».
+- `app/layout.js` : menu commun aux deux pages.
 - Lancer en local : `npm run dev`, puis http://localhost:3000.
 
 ## Phases
 1. **Préparer le Sheet** (Michel / vous) : partage par lien (déjà fait, en Éditeur — on n'y touche pas), ligne « organisateur » (fait), remplacer A à E par les vrais noms.
 2. **Page « Prochain dîner »** : lecture du Sheet + règles de classement. Test en local. ✅ Fait.
-3. **Page « Statistiques »**.
-4. **Mise en ligne** sur Vercel.
+3. **Page « Statistiques »**. ✅ Fait.
+4. **Mise en ligne** sur Vercel. ✅ Fait (avant la phase 3, à la demande).
 
 ## Historique des changements
+- 2026-11-03 — Phase 3 : page « Statistiques » (dîners, organisations, désistements, tableau des présences) + menu en haut des pages.
+- 2026-11-03 — Site en ligne sur https://diner-de-mecs.vercel.app, vérifié sur le tableau test.
+- 2026-11-03 — Mise en ligne : code envoyé sur GitHub FA31000/Diner-de-mecs, `vercel.json` ajouté (type Next.js) après un échec de déploiement.
 - 2026-11-03 — Organisateur : lu dans la colonne B de la ligne « organisateur » (au lieu d'un « oui » sous le nom).
 - 2026-11-03 — Site branché sur le tableau test (180CWvjX…) au lieu du vrai Sheet.
 - 2026-11-03 — Noms : points et virgules ignorés dans la comparaison (`clean()` dans `lib/sheet.js`).
