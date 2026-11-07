@@ -35,7 +35,7 @@ Pour chaque colonne de la ligne des noms :
 Un dîner compte dès le lendemain de sa date. On part de zéro : seuls les dîners qui ont leur propre onglet comptent. Le premier est le 11 novembre 2026.
 
 ### Comparaison des noms
-Les noms des onglets de dîner sont comparés à ceux de la liste des participants en ignorant majuscules, points, virgules et espaces en trop. « Michel R. » = « michel r ».
+Les noms des onglets de dîner sont comparés à ceux de la liste des participants en ignorant majuscules, points, virgules, tirets et espaces en trop. « Michel R. » = « michel r », « Jean-Michel » = « Jean Michel ».
 
 ### Le prochain dîner
 - C'est l'onglet dont la date est aujourd'hui ou plus tard, le plus proche.
@@ -105,6 +105,7 @@ Une barre verte en haut de chaque page : « Prochain dîner », « Dîners préc
 4. **Mise en ligne** sur Vercel. ✅ Fait (avant la phase 3, à la demande).
 
 ## Historique des changements
+- 2026-11-07 — Noms : les tirets sont aussi ignorés (« Jean-Michel » = « Jean Michel »).
 - 2026-11-07 — Page « Règles » ajoutée au menu. Retours de Jean-Michel : priorité hôte (invité au dîner suivant, ou à celui d'après s'il était empêché, sans que ce dîner compte) ; « organisateur » renommé « hôte » sur le site ; hôte entouré dans « Présences », remplaçants marqués ᴿ et tableau « Remplacements » ; la page « Prochain dîner » affiche les vraies réponses de l'onglet du dîner (désistements et remplaçants du jour).
 - 2026-11-03 — Page « Dîners précédents » ajoutée au menu ; `lib/sheet.js` garde aussi qui a remplacé qui (`replacedBy`).
 - 2026-11-03 — Phase 3 : page « Statistiques » (dîners, organisations, désistements, tableau des présences) + menu en haut des pages.

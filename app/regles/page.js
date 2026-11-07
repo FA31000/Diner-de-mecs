@@ -92,8 +92,8 @@ export default function Rules() {
       <h2>Les noms</h2>
       <p>
         Les noms des onglets de dîner sont comparés à ceux de la liste des participants sans tenir compte des
-        majuscules, des points, des virgules ni des espaces en trop : « Michel R. » = « michel r ». Un nom mal orthographié
-        (« Jean-Michel » / « Jean Michel ») n'est en revanche pas reconnu.
+        majuscules, des points, des virgules, des tirets ni des espaces en trop : « Michel R. » = « michel r » et
+        « Jean-Michel » = « Jean Michel ». Une vraie faute d'orthographe (« Micheal ») n'est en revanche pas reconnue.
       </p>
     </main>
   );
