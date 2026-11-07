@@ -122,3 +122,55 @@ tr.inactive {
   padding: 12px;
   border-radius: 8px;
 }
+
+.host-mark {
+  display: inline-block;
+  width: 1.4em;
+  height: 1.4em;
+  line-height: 1.4em;
+  border: 2px solid #2f5d34;
+  border-radius: 50%;
+  text-align: center;
+}
+
+.status {
+  color: #777;
+  font-size: 0.85rem;
+}
+
+.status.yes {
+  color: #2f5d34;
+}
+
+.status.no {
+  color: #a33;
+}
+
+.rules p,
+.rules li {
+  line-height: 1.5;
+}
+
+.rules ol.steps {
+  list-style: decimal;
+  padding-left: 22px;
+}
+
+.rules ol.steps li,
+.rules ul li {
+  display: list-item;
+  background: none;
+  padding: 2px 0;
+  margin-bottom: 6px;
+}
+
+.rules ul {
+  padding-left: 22px;
+}
+
+.rules .card {
+  background: white;
+  border-radius: 8px;
+  padding: 4px 16px;
+  margin-top: 12px;
+}

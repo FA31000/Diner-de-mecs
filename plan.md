@@ -22,7 +22,7 @@ Michel continue de tout gérer dans son Google Sheet. Le site ne fait que lire c
 - Ligne des noms : la ligne qui commence par « Repas du… ». Une colonne par invité.
 - Ligne « Viendra OUI/NON » : oui ou non sous chaque nom.
 - Ligne « Remplacé par… » : nom du remplaçant quand la personne a dit non.
-- Ligne « organisateur » (en ligne 2, au-dessus des noms) : le nom de l'organisateur est écrit en colonne B, à droite du libellé.
+- Ligne « organisateur » (ou « hôte »), en ligne 2, au-dessus des noms : le nom de l'hôte est écrit en colonne B, à droite du libellé. Sur le site, on dit « hôte ».
 - Le tableau récapitulatif en bas de l'onglet est ignoré.
 
 ## Règles de calcul
@@ -39,11 +39,11 @@ Les noms des onglets de dîner sont comparés à ceux de la liste des participan
 
 ### Le prochain dîner
 - C'est l'onglet dont la date est aujourd'hui ou plus tard, le plus proche.
-- 6 personnes au total : l'organisateur + 5 invités.
-- Organisateur = le nom en colonne B de la ligne « organisateur » de cet onglet. Si la case est vide ou s'il n'y a pas d'onglet : **Michel R** par défaut.
+- 6 personnes au total : l'hôte + 5 invités.
+- Hôte = le nom en colonne B de la ligne « organisateur » (ou « hôte ») de cet onglet. Si la case est vide ou s'il n'y a pas d'onglet : **Michel R** par défaut.
 
 ### Classement des autres membres actifs
-1. Bonus organisateur : celui qui a organisé un dîner doit être invité à l'un des 2 dîners suivants. S'il n'est pas venu au dîner d'après, il passe en tête de la liste du dîner suivant.
+1. Priorité hôte : l'hôte d'un dîner passe en tête du dîner suivant ; s'il n'y est pas venu, il passe en tête de celui d'après. Ce dîner d'invitation n'est pas compté dans son nombre de dîners (ni pour « dernier dîner » dans le classement).
 2. Ensuite, ceux qui sont venus le moins souvent passent devant.
 3. Rattrapage limité : on considère qu'un membre a au maximum 2 dîners de retard sur celui qui en a fait le plus. (Ex. : parti 4 mois, il ne rattrape que 2 dîners.)
 4. À égalité : celui qui n'est pas venu depuis le plus longtemps passe devant.
@@ -54,21 +54,25 @@ Un désistement ne compte pas comme une venue. La personne remonte donc d'elle-m
 ## Le site
 
 ### Page « Prochain dîner »
-1. Date du prochain dîner et organisateur.
-2. Les 5 invités (les 5 premiers du classement).
-3. La liste d'attente, dans l'ordre : si un invité dit non, on appelle le suivant.
+1. Date du prochain dîner et hôte.
+2. Les 5 invités : les 5 premiers du classement. Dès que des noms sont écrits dans l'onglet du prochain dîner, on affiche plutôt ces noms avec leur réponse (vient / excusé → remplacé par… / pas encore répondu).
+3. La liste d'attente, dans l'ordre : si un invité dit non, on appelle le suivant. Les personnes déjà inscrites dans l'onglet (invités et remplaçants) en sont retirées.
 4. À côté de chaque nom : nombre de dîners et date du dernier dîner.
 
 ### Page « Statistiques » (`/stats`)
 Ne compte que les dîners passés. Montre tous les membres de la liste (les inactifs en gris, marqués « inactif »).
-- Tableau « Par personne » : nombre de dîners (A), nombre de fois organisateur (B), nombre de désistements (C).
-- Tableau « Présences » (D) : une colonne par dîner passé. ✓ = venu, ✗ = désisté, vide = pas invité.
+- Tableau « Par personne » : nombre de dîners (A), nombre de fois hôte (B), nombre de désistements (C).
+- Tableau « Présences » (D) : une colonne par dîner passé. ✓ entouré = hôte, ✓ = venu, ✓ᴿ = venu en remplaçant, ✗ = désisté, vide = pas invité.
+- Tableau « Remplacements » : qui a remplacé qui, dîner par dîner.
 
 ### Page « Dîners précédents » (`/diners`)
-Une carte par dîner passé, du plus récent au plus ancien : date, organisateur, liste des venus, désistements (avec « remplacé par … » si un remplaçant est indiqué). Les noms sont affichés comme dans la liste des participants.
+Une carte par dîner passé, du plus récent au plus ancien : date, hôte, liste des venus, désistements (avec « remplacé par … » si un remplaçant est indiqué). Les noms sont affichés comme dans la liste des participants.
+
+### Page « Règles » (`/regles`)
+Récapitule toutes les règles de priorité (hôte, classement, ce qui compte comme une venue, désistements, noms). Le texte reprend les réglages de `lib/ranking.js` (5 invités, rattrapage de 2, hôte par défaut). À tenir à jour si les règles changent.
 
 ### Menu
-Une barre verte en haut de chaque page : « Prochain dîner », « Dîners précédents », « Statistiques ».
+Une barre verte en haut de chaque page : « Prochain dîner », « Dîners précédents », « Statistiques », « Règles ».
 
 ### Fonctionnement
 - Le site relit le Google Sheet à chaque ouverture. Pas de base de données, pas de tâche automatique.
@@ -90,6 +94,7 @@ Une barre verte en haut de chaque page : « Prochain dîner », « Dîners préc
 - `app/page.js` : page « Prochain dîner ».
 - `lib/stats.js` + `app/stats/page.js` : page « Statistiques ».
 - `app/diners/page.js` : page « Dîners précédents ».
+- `app/regles/page.js` : page « Règles ».
 - `app/layout.js` : menu commun aux pages.
 - Lancer en local : `npm run dev`, puis http://localhost:3000.
 
@@ -100,6 +105,7 @@ Une barre verte en haut de chaque page : « Prochain dîner », « Dîners préc
 4. **Mise en ligne** sur Vercel. ✅ Fait (avant la phase 3, à la demande).
 
 ## Historique des changements
+- 2026-11-07 — Page « Règles » ajoutée au menu. Retours de Jean-Michel : priorité hôte (invité au dîner suivant, ou à celui d'après s'il était empêché, sans que ce dîner compte) ; « organisateur » renommé « hôte » sur le site ; hôte entouré dans « Présences », remplaçants marqués ᴿ et tableau « Remplacements » ; la page « Prochain dîner » affiche les vraies réponses de l'onglet du dîner (désistements et remplaçants du jour).
 - 2026-11-03 — Page « Dîners précédents » ajoutée au menu ; `lib/sheet.js` garde aussi qui a remplacé qui (`replacedBy`).
 - 2026-11-03 — Phase 3 : page « Statistiques » (dîners, organisations, désistements, tableau des présences) + menu en haut des pages.
 - 2026-11-03 — Site en ligne sur https://diner-de-mecs.vercel.app, vérifié sur le tableau test.

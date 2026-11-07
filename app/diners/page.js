@@ -31,7 +31,7 @@ export default async function PastDinners() {
         <section key={dinner.name} className="dinner">
           <h2>{dinner.name}</h2>
           <p>
-            <strong>Organisateur :</strong> {dinner.organizer ? displayName(dinner.organizer) : "non indiqué"}
+            <strong>Hôte :</strong> {dinner.host ? displayName(dinner.host) : "non indiqué"}
           </p>
           <p>
             <strong>Venus ({dinner.attendees.length}) :</strong> {dinner.attendees.map(displayName).join(", ") || "personne"}

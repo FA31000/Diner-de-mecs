@@ -14,6 +14,7 @@ export default function RootLayout({ children }) {
           <Link href="/">Prochain dîner</Link>
           <Link href="/diners">Dîners précédents</Link>
           <Link href="/stats">Statistiques</Link>
+          <Link href="/regles">Règles</Link>
         </nav>
         {children}
       </body>
