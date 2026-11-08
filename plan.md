@@ -72,7 +72,7 @@ Une carte par dîner passé, du plus récent au plus ancien : date, hôte, liste
 Récapitule toutes les règles de priorité (hôte, classement, ce qui compte comme une venue, désistements, noms). Le texte reprend les réglages de `lib/ranking.js` (5 invités, rattrapage de 2, hôte par défaut). À tenir à jour si les règles changent.
 
 ### Menu
-Une barre verte en haut de chaque page : « Prochain dîner », « Dîners précédents », « Statistiques », « Règles ».
+Une barre noire (liseré rouge) en haut de chaque page : « Prochain dîner », « Dîners précédents », « Statistiques », « Règles ».
 
 ### Fonctionnement
 - Le site relit le Google Sheet à chaque ouverture. Pas de base de données, pas de tâche automatique.
@@ -105,6 +105,7 @@ Une barre verte en haut de chaque page : « Prochain dîner », « Dîners préc
 4. **Mise en ligne** sur Vercel. ✅ Fait (avant la phase 3, à la demande).
 
 ## Historique des changements
+- 2026-11-08 — Couleurs : passage du vert au rouge et noir (style Stade Toulousain) dans `app/globals.css` : barre de menu noire avec liseré rouge, hôte en rouge, titres avec barre rouge, « vient » en noir gras, « excusé » en rouge.
 - 2026-11-07 — Noms : les accents sont aussi ignorés (« Thalès » = « Thales »), y compris dans les mois des onglets et les libellés de lignes.
 - 2026-11-07 — Noms : les tirets sont aussi ignorés (« Jean-Michel » = « Jean Michel »).
 - 2026-11-07 — Page « Règles » ajoutée au menu. Retours de Jean-Michel : priorité hôte (invité au dîner suivant, ou à celui d'après s'il était empêché, sans que ce dîner compte) ; « organisateur » renommé « hôte » sur le site ; hôte entouré dans « Présences », remplaçants marqués ᴿ et tableau « Remplacements » ; la page « Prochain dîner » affiche les vraies réponses de l'onglet du dîner (désistements et remplaçants du jour).
